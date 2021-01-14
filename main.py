@@ -176,7 +176,7 @@ class DRS(tk.Tk):
             self.frame = cv.cvtColor(cv.imread(self.decision), cv.COLOR_BGR2RGB)
             self.frame = imutils.resize(image = self.frame, width = self.WIDTH, height = self.HEIGHT)
         except cv.error:
-            if self.decision == "Out":
+            if decision == "Out":
                 self.val = askokcancel("File Not Found", "out.png could not be found. Do you want to replace it with some of your own file or make a out.png of your own")
             else:
                 self.val = askokcancel("File Not Found", "not_out.png could not be found. Do you want to replace it with some of your own file or make a not_out.png of your own")
@@ -194,15 +194,18 @@ class DRS(tk.Tk):
                 else:
                     self.default = askyesno("Make Default", "Do you want to make this as your default not_out screen image")
                 if self.default:
-                    with open("Images.txt", "w") as f:
-                        if self.decision == "Out":
-                            self.images[3] = self.file
+                    if decision == "Out":
+                        self.images[3] = self.file
+                        with open("Images.txt", "w") as f:
                             f.write("\n".join(self.images) + "\n")
-                        else:
-                            self.images[4] = self.file
+                        self.frame = ImageTk.PhotoImage(image = Image.fromarray(self.cv_img))
+                        self.canvas.create_image(0, 0, image = self.frame, anchor = tk.NW)
+                    else:
+                        self.images[4] = self.file
+                        with open("Images.txt", "w") as f:
                             f.write("\n".join(self.images) + "\n")
-                    self.frame = ImageTk.PhotoImage(image = Image.fromarray(self.cv_img))
-                    self.canvas.create_image(0, 0, image = self.frame, anchor = tk.NW)
+                        self.frame = ImageTk.PhotoImage(image = Image.fromarray(self.cv_img))
+                        self.canvas.create_image(0, 0, image = self.frame, anchor = tk.NW)
             else:
                 exit() 
         else:
