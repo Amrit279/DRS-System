@@ -1,0 +1,1 @@
+This is a Simpler version of DRS system used in Cricket matches. It lets you move the frames of your recorded video with installed webcam backwards and forwards and then give a decision by going a few frames backwards and forwards and make the game easier for the umpire.

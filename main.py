@@ -1,3 +1,10 @@
+'''
+Author: Amrit279
+Started Writing: 13 January, 2021
+DRS System (Repository on Git Hub)
+Purpose: Making it easier for the umpires to make the correct decision on the feild
+'''
+
 import capture # Not an in-built or installed module
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
@@ -20,12 +27,14 @@ class DRS(tk.Tk):
         Shows a welcome screen image and buttons
         """
         super().__init__()
-        # capture.makeVideo()
+        capture.makeVideo()
         self.video = cv.VideoCapture("output.avi")
         self.flag = True
         self.WIDTH = 650
         self.HEIGHT = 368
-        self.title("Decision Review System")
+        self.title("Gully Cricket Decision Review System")
+        self.wm_iconbitmap("icon.ico")
+
         with open("Images.txt", "r") as f:
             self.images = f.read().split("\n")
         try:
