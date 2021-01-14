@@ -11,14 +11,14 @@ class DRS(tk.Tk):
     """
     def __init__(self):
         super().__init__()
-        # capture.makeVideo()
+        capture.makeVideo()
         self.WIDTH = 650
         self.HEIGHT = 368
         self.title("Decision Review System")
         try:
             self.cv_img = cv.cvtColor(cv.imread("welcome.png"), cv.COLOR_BGR2RGB)
         except cv.error:
-            self.file = askopenfilename(defaultextension = ".png", filetypes = [("JPG files", "*.jpg"), ("GIF files", "*.gif")])
+            self.file = askopenfilename(defaultextension = ".png", filetypes = [("JPG files", "*.jpg"), ("GIF files", "*.gif"), ("PNG files", "*.png")])
             self.cv_img = cv.cvtColor(cv.imread(self.file), cv.COLOR_BGR2RGB)
             
         self.canvas = tk.Canvas(self, width = self.WIDTH, height = self.HEIGHT)
