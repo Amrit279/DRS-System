@@ -7,6 +7,7 @@ import cv2 as cv # pip install opencv-python
 import threading
 import imutils # pip install imutils
 import time
+from functools import partial
 class DRS(tk.Tk):
     """
     Helps the umpire in making his decision if he is not sure whether the batsman is out or
@@ -15,7 +16,7 @@ class DRS(tk.Tk):
     """
     def __init__(self):
         super().__init__()
-        # capture.makeVideo()
+        capture.makeVideo()
         self.WIDTH = 650
         self.HEIGHT = 368
         self.title("Decision Review System")
@@ -42,7 +43,7 @@ class DRS(tk.Tk):
         self.but.pack()
         self.but = tk.Button(self, text = "Give Not Out", padx = 16.4, command = self.not_out)
         self.but.pack()
-    
+
     def out(self):
         thread = threading.Thread(target= self.pending, args = ("Out",))
         thread.daemon = 1
