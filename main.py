@@ -1,5 +1,6 @@
 import capture # Not an in-built or installed module
 import tkinter as tk
+from tkinter.filedialog import askopenfilename
 from PIL import Image, ImageTk # pip install pillow
 import cv2 as cv # pip install opencv-python
 class DRS(tk.Tk):
@@ -10,11 +11,16 @@ class DRS(tk.Tk):
     """
     def __init__(self):
         super().__init__()
-        capture.makeVideo()
+        # capture.makeVideo()
         self.WIDTH = 650
         self.HEIGHT = 368
         self.title("Decision Review System")
-        self.cv_img = cv.cvtColor(cv.imread("welcome.png"), cv.COLOR_BGR2RGB)
+        try:
+            self.cv_img = cv.cvtColor(cv.imread("welcome.png"), cv.COLOR_BGR2RGB)
+        except cv.error:
+            self.file = askopenfilename(defaultextension = ".png", filetypes = [("JPG files", "*.jpg"), ("GIF files", "*.gif")])
+            self.cv_img = cv.cvtColor(cv.imread(self.file), cv.COLOR_BGR2RGB)
+            
         self.canvas = tk.Canvas(self, width = self.WIDTH, height = self.HEIGHT)
         self.photo = ImageTk.PhotoImage(image = Image.fromarray(self.cv_img))
         self.canvas.create_image(0, 0, image = self.photo, anchor = tk.NW)
